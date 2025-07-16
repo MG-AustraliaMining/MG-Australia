@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MG Australia - Professional Services</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #032A53;
+            --secondary-color: #2a9d8f;
+            --accent-color: #4CC9F0;
+            --text-color: #f8f9fa;
+            --hover-color: #2ecc71;
+            --footer-color: #021A35;
+            --highlight-color: #27ae60;
+            --glass-color: rgba(3, 42, 83, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth page load animation */
+        body.loaded {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        /* Hero Video Section */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+        
+        #video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            animation: zoomIn 15s infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-text {
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* Dynamic Island Header */
+        .dynamic-island {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            visibility: hidden;
+            min-width: fit-content;
+            max-width: 95vw;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(74, 144, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+        }
+        
+        .dynamic-island.visible {
+            opacity: 1;
+            visibility: visible;
+            top: 15px;
+            transform: translateX(-50%) scale(1);
+            animation: genie 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), pulse 4s infinite;
+        }
+        
+        /* Hamburger Menu for Dynamic Island - CHANGED TO WHITE */
+        .dynamic-island .hamburger {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: white; /* Changed from black to white */
+            padding: 0;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dynamic-island .hamburger:hover {
+            transform: rotate(90deg);
+        }
+        
+        .dynamic-island .navbar-collapse {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 20px 20px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dynamic-island.expanded {
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .dynamic-island.expanded .navbar-collapse {
+            display: block;
+        }
+        
+        .dynamic-island .nav-links {
+            flex-direction: column;
+            gap: 5px;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+        
+        .dynamic-island .nav-links a {
+            display: block;
+            width: 100%;
+            padding: 10px 15px !important;
+            border-radius: 5px !important;
+            margin: 0 !important;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dynamic-island .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        /* Desktop Menu in Dynamic Island */
+        .dynamic-island .desktop-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .dynamic-island .desktop-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            border-radius: 20px;
+        }
+        
+        .dynamic-island .desktop-menu a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--hover-color);
+            transition: all 0.3s ease;
+        }
+        
+        .dynamic-island .desktop-menu a:hover {
+            color: var(--hover-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dynamic-island .desktop-menu a:hover:before {
+            width: 70%;
+        }
+        
+        @keyframes genie {
+            0% { transform: translateX(-50%) scaleY(0.1) scaleX(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+        }
+        
+        /* Main Header Content */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Menu Text Animation */
+        .header-content .nav-link {
+            color: white !important;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.4s ease;
+            background: transparent;
+            border: none;
+        }
+        
+        .header-content .nav-link:hover {
+            color: transparent !important;
+            background: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            transform: translateY(-3px);
+            text-shadow: 0 5px 15px rgba(0, 219, 222, 0.3);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+            cursor: pointer;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .logo:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        /* Contact Info - Desktop */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Language Selector Dropdown */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .language-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .language-dropdown.active .language-btn i {
+            transform: rotate(180deg);
+        }
+        
+        .language-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 5px;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 10px;
+            padding: 5px 0;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .language-dropdown.active .language-menu {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 15px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Content Boxes Section */
+        .content-section {
+            padding: 50px 20px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--primary-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 0;
+        }
+        
+        .content-box {
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .content-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            transition: all 0.5s ease;
+        }
+        
+        .content-box:hover .content-icon {
+            transform: scale(1.2) rotate(15deg);
+        }
+        
+        .content-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        
+        .content-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* General Information Section */
+        .info-section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--primary-color);
+        }
+
+        .info-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .info-card {
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Footer Menu Bar */
+        .footer-menu {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .footer-menu a:hover {
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .social-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px) scale(1.2);
+        }
+        
+        /* Improved Contact Button - Mobile - REDUCED TO 40% SIZE */
+        .contact-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--highlight-color), var(--accent-color));
+            color: white;
+            width: 42px; /* Reduced from 70px to ~40% */
+            height: 42px; /* Reduced from 70px to ~40% */
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(46, 204, 113, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .contact-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+        }
+        
+        .contact-btn i {
+            font-size: 1rem; /* Reduced icon size proportionally */
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-btn:hover i {
+            transform: scale(1.1);
+        }
+        
+        .contact-menu {
+            position: fixed;
+            bottom: 82px; /* Adjusted for new button size */
+            right: 30px;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 250px;
+            display: none;
+            z-index: 1000;
+            transform-origin: bottom right;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact-menu.active {
+            display: block;
+        }
+        
+        .contact-menu h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .contact-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        .contact-option i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 950px) {
+            .dynamic-island {
+                padding: 10px 15px;
+                gap: 10px;
+            }
+            
+            .dynamic-island .desktop-menu {
+                display: none;
+            }
+            
+            .dynamic-island .hamburger {
+                display: block;
+                order: 1;
+            }
+            
+            .dynamic-island .language-dropdown {
+                order: 2;
+                margin-left: auto;
+            }
+            
+            .dynamic-island .contact-info {
+                display: none;
+            }
+            
+            .header-content .contact-info {
+                display: none;
+            }
+            
+            .header-content .language-dropdown {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+            
+            .contact-btn {
+                display: flex;
+            }
+            
+            .video-text {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 60vh;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .video-text {
+                font-size: 1.8rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-section {
+                height: 50vh;
+            }
+            
+            .dynamic-island {
+                padding: 8px 12px;
+            }
+            
+            .dynamic-island .logo {
+                height: 30px;
+            }
+            
+            .video-text {
+                font-size: 1.5rem;
+            }
+            
+            .contact-menu {
+                width: 220px;
+                right: 15px;
+            }
+        }
+
+            /* Force white hamburger icon */
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    color: white !important;
+}
+    </style>
+</head>
+<body>
+    <!-- Dynamic Island Header -->
+    <div class="dynamic-island" id="dynamicIsland">
+        <img src="logo.png" alt="MG Australia Logo" class="logo" id="homeLogo">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="desktop-menu">
+            <a href="about.html" data-translate="about">About MG</a>
+            <a href="services.html" data-translate="services">Services</a>
+            <a href="contact.html" data-translate="contact">Contact</a>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="nav-links">
+                <li><a href="about.html" data-translate="about">About MG</a></li>
+                <li><a href="services.html" data-translate="services">Services</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="contact-info">
+            <a href="mailto:rosariochoquenaira@gmail.com" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span data-translate="email">Email</span>
+            </a>
+            <a href="tel:0467660148" class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span data-translate="call">Call</span>
+            </a>
+            <a href="https://wa.me/61467760148" target="_blank" class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span data-translate="whatsapp">WhatsApp</span>
+            </a>
+        </div>
+        <div class="language-dropdown">
+            <button class="language-btn">
+                <span>EN</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-menu">
+                <a href="#" class="language-option" data-lang="en">English</a>
+                <a href="#" class="language-option" data-lang="es">Español</a>
+                <a href="#" class="language-option" data-lang="zh">中文</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Header -->
+    <div class="header-content glass">
+        <div class="logo-container">
+            <img src="logo.png" alt="MG Australia Logo" class="logo" id="homeLogo2">
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav-links navbar-nav">
+                        <li class="nav-item"><a href="about.html" class="nav-link" data-translate="about">About MG</a></li>
+                        <li class="nav-item"><a href="services.html" class="nav-link" data-translate="services">Services</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link" data-translate="contact">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="contact-info d-none d-lg-flex">
+                <a href="mailto:rosariochoquenaira@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span data-translate="email">Email</span>
+                </a>
+                <a href="tel:0467660148" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span data-translate="call">Call</span>
+                </a>
+                <a href="https://wa.me/61467760148" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-translate="whatsapp">WhatsApp</span>
+                </a>
+            </div>
+            <div class="language-dropdown">
+                <button class="language-btn">
+                    <span>EN</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-menu">
+                    <a href="#" class="language-option" data-lang="en">English</a>
+                    <a href="#" class="language-option" data-lang="es">Español</a>
+                    <a href="#" class="language-option" data-lang="zh">中文</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Video Section -->
+    <section class="hero-section">
+        <video id="video-background" autoplay muted loop playsinline>
+            <source src="videobac.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+            <div class="video-text" data-translate="video_text">The Future of Mining starts now</div>
+        </div>
+    </section>
+    
+    <!-- Content Boxes Section -->
+    <section class="content-section">
+        <div class="content-grid">
+            <div class="content-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="content-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3 class="content-title" data-translate="mining">Mining</h3>
+                <p class="content-description" data-translate="mining_desc">Innovative and sustainable mining solutions for the modern era.</p>
+            </div>
+            
+            <div class="content-box" data-aos="fade-up" data-aos-delay="200">
+                <div class="content-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="content-title" data-translate="sustainability">Sustainability</h3>
+                <p class="content-description" data-translate="sustainability_desc">Eco-friendly practices that protect our environment.</p>
+            </div>
+            
+            <div class="content-box" data-aos="fade-up" data-aos-delay="300">
+                <div class="content-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="content-title" data-translate="technology">Technology</h3>
+                <p class="content-description" data-translate="technology_desc">Cutting-edge technology driving industry innovation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Information Section -->
+    <section class="info-section">
+        <h2 data-translate="overview">Quick Overview</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3 data-translate="about">About MG</h3>
+                <p data-translate="about_desc">MG Australia specializes in sustainable mining solutions with a focus on innovation and environmental responsibility.</p>
+            </div>
+            <div class="info-card">
+                <h3 data-translate="services">Services</h3>
+                <p data-translate="services_desc">We offer end-to-end mining services, from exploration to rehabilitation, using cutting-edge technology.</p>
+            </div>
+            <div class="info-card">
+                <h3 data-translate="contact">Contact</h3>
+                <p data-translate="contact_desc">Reach out for partnerships or inquiries via email, phone, or WhatsApp. We're here to help!</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <!-- Footer Menu Bar -->
+            <div class="footer-menu">
+                <a href="about.html" data-translate="about">About MG</a>
+                <a href="services.html" data-translate="services">Services</a>
+                <a href="contact.html" data-translate="contact">Contact</a>
+                <a href="privacy.html" data-translate="privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="terms">Terms of Service</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="copyright mt-3" data-translate="copyright">
+                &copy; 2025 MG Australia. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Contact Button - Mobile -->
+    <div class="contact-btn" id="contactBtn">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <div class="contact-menu" id="contactMenu">
+        <h3 data-translate="help">Contact Us</h3>
+        <a href="mailto:rosariochoquenaira@gmail.com" class="contact-option">
+            <i class="fas fa-envelope"></i> <span data-translate="email">Email</span>
+        </a>
+        <a href="tel:0467660148" class="contact-option">
+            <i class="fas fa-phone"></i> <span data-translate="call">Call</span>
+        </a>
+        <a href="https://wa.me/61467760148" target="_blank" class="contact-option">
+            <i class="fab fa-whatsapp"></i> <span data-translate="whatsapp">WhatsApp</span>
+        </a>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Page load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Complete Language Translation System
+        const translations = {
+            en: {
+                about: "About MG",
+                services: "Services",
+                contact: "Contact",
+                help: "Contact Us",
+                email: "Email",
+                call: "Call",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG Australia. All rights reserved.",
+                video_text: "The Future of Mining starts now",
+                mining: "Mining",
+                mining_desc: "Innovative and sustainable mining solutions for the modern era.",
+                sustainability: "Sustainability",
+                sustainability_desc: "Eco-friendly practices that protect our environment.",
+                technology: "Technology",
+                technology_desc: "Cutting-edge technology driving industry innovation.",
+                overview: "Quick Overview",
+                about_desc: "MG Australia specializes in sustainable mining solutions with a focus on innovation and environmental responsibility.",
+                services_desc: "We offer end-to-end mining services, from exploration to rehabilitation, using cutting-edge technology.",
+                contact_desc: "Reach out for partnerships or inquiries via email, phone, or WhatsApp. We're here to help!",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service"
+            },
+            es: {
+                about: "Sobre MG",
+                services: "Servicios",
+                contact: "Contacto",
+                help: "Contáctenos",
+                email: "Correo",
+                call: "Llamar",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG Australia. Todos los derechos reservados.",
+                video_text: "El futuro de la minería comienza ahora",
+                mining: "Minería",
+                mining_desc: "Soluciones mineras innovadoras y sostenibles para la era moderna.",
+                sustainability: "Sostenibilidad",
+                sustainability_desc: "Prácticas ecológicas que protegen nuestro medio ambiente.",
+                technology: "Tecnología",
+                technology_desc: "Tecnología de vanguardia que impulsa la innovación industrial.",
+                overview: "Resumen Rápido",
+                about_desc: "MG Australia se especializa en soluciones mineras sostenibles con un enfoque en innovación y responsabilidad ambiental.",
+                services_desc: "Ofrecemos servicios mineros integrales, desde exploración hasta rehabilitación, utilizando tecnología de vanguardia.",
+                contact_desc: "Contáctenos para asociaciones o consultas por correo electrónico, teléfono o WhatsApp. ¡Estamos aquí para ayudar!",
+                privacy: "Política de Privacidad",
+                terms: "Términos de Servicio"
+            },
+            zh: {
+                about: "关于MG",
+                services: "服务",
+                contact: "联系我们",
+                help: "联系我们",
+                email: "电子邮件",
+                call: "电话",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG澳大利亚。保留所有权利。",
+                video_text: "采矿的未来从现在开始",
+                mining: "采矿",
+                mining_desc: "为现代时代提供创新和可持续的采矿解决方案。",
+                sustainability: "可持续性",
+                sustainability_desc: "保护我们环境的环保做法。",
+                technology: "技术",
+                technology_desc: "推动行业创新的尖端技术。",
+                overview: "快速概述",
+                about_desc: "MG澳大利亚专注于可持续采矿解决方案，注重创新和环保责任。",
+                services_desc: "我们提供端到端的采矿服务，从勘探到复垦，使用尖端技术。",
+                contact_desc: "通过电子邮件、电话或WhatsApp联系我们进行合作或查询。我们随时为您提供帮助！",
+                privacy: "隐私政策",
+                terms: "服务条款"
+            }
+        };
+
+        // Apply translations to the page
+        function applyTranslations(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update dropdown button text
+            const dropdownBtns = document.querySelectorAll('.language-btn span');
+            dropdownBtns.forEach(btn => {
+                if (lang === 'en') btn.textContent = 'EN';
+                else if (lang === 'es') btn.textContent = 'ES';
+                else if (lang === 'zh') btn.textContent = '中文';
+            });
+            
+            localStorage.setItem('language', lang);
+        }
+
+        // Initialize with saved language or default
+        const currentLang = localStorage.getItem('language') || 'en';
+        applyTranslations(currentLang);
+
+        // Language dropdown functionality
+        document.querySelectorAll('.language-dropdown .language-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.closest('.language-dropdown');
+                dropdown.classList.toggle('active');
+            });
+        });
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                applyTranslations(lang);
+                this.closest('.language-dropdown').classList.remove('active');
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-dropdown')) {
+                document.querySelectorAll('.language-dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Dynamic Island Header - Only appears when main header is not visible
+        const dynamicIsland = document.getElementById('dynamicIsland');
+        const headerContent = document.querySelector('.header-content');
+        const dynamicHamburger = document.querySelector('.dynamic-island .hamburger');
+        
+        function checkHeaderVisibility() {
+            const headerRect = headerContent.getBoundingClientRect();
+            const isHeaderVisible = headerRect.bottom > 0;
+            
+            if (!isHeaderVisible) {
+                dynamicIsland.classList.add('visible');
+            } else {
+                dynamicIsland.classList.remove('visible');
+                dynamicIsland.classList.remove('expanded');
+                dynamicIsland.querySelector('.navbar-collapse').style.display = 'none';
+            }
+        }
+        
+        // Dynamic Island Hamburger
+        dynamicHamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dynamicIsland.classList.toggle('expanded');
+            const navCollapse = dynamicIsland.querySelector('.navbar-collapse');
+            if (dynamicIsland.classList.contains('expanded')) {
+                navCollapse.style.display = 'block';
+            } else {
+                navCollapse.style.display = 'none';
+            }
+        });
+        
+        window.addEventListener('scroll', checkHeaderVisibility);
+        window.addEventListener('resize', checkHeaderVisibility);
+
+        // Contact Button Functionality - Mobile
+        const contactBtn = document.getElementById('contactBtn');
+        const contactMenu = document.getElementById('contactMenu');
+        
+        contactBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            contactMenu.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!contactBtn.contains(e.target) && !contactMenu.contains(e.target)) {
+                contactMenu.classList.remove('active');
+            }
+        });
+        
+        // Enable video sound after interaction
+        document.body.addEventListener('click', function() {
+            document.getElementById('video-background').muted = false;
+        }, { once: true });
+        
+        // Logo click to home
+        document.getElementById('homeLogo').addEventListener('click', function() {
+            window.location.href = 'https://mg-australia.github.io/MG-Australia';
+        });
+        
+        document.getElementById('homeLogo2').addEventListener('click', function() {
+            window.location.href = 'https://mg-australia.github.io/MG-Australia';
+        });
+    </script>
+</body>
+</html>
