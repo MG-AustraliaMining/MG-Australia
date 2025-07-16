@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MG Australia - Professional Mining Services</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #032A53;
+            --secondary-color: #2a9d8f;
+            --accent-color: #4CC9F0;
+            --text-color: #f8f9fa;
+            --hover-color: #2ecc71;
+            --footer-color: #021A35;
+            --highlight-color: #27ae60;
+            --glass-color: rgba(3, 42, 83, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth page load animation */
+        body.loaded {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+        
+        /* Dynamic Island Header */
+        .dynamic-island {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            visibility: hidden;
+            min-width: fit-content;
+            max-width: 95vw;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(74, 144, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+        }
+        
+        .dynamic-island.visible {
+            opacity: 1;
+            visibility: visible;
+            top: 15px;
+            transform: translateX(-50%) scale(1);
+            animation: genie 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), pulse 4s infinite;
+        }
+        
+        /* Hamburger Menu for Dynamic Island */
+        .dynamic-island .hamburger {
+            display: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 0;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dynamic-island .hamburger:hover {
+            transform: rotate(90deg);
+        }
+        
+        .dynamic-island .navbar-collapse {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 0 0 20px 20px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 1001;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dynamic-island.expanded {
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .dynamic-island.expanded .navbar-collapse {
+            display: block;
+        }
+        
+        .dynamic-island .nav-links {
+            flex-direction: column;
+            gap: 5px;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+        
+        .dynamic-island .nav-links a {
+            display: block;
+            width: 100%;
+            padding: 10px 15px !important;
+            border-radius: 5px !important;
+            margin: 0 !important;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dynamic-island .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        /* Desktop Menu in Dynamic Island */
+        .dynamic-island .desktop-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .dynamic-island .desktop-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            border-radius: 20px;
+        }
+        
+        .dynamic-island .desktop-menu a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--hover-color);
+            transition: all 0.3s ease;
+        }
+        
+        .dynamic-island .desktop-menu a:hover {
+            color: var(--hover-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .dynamic-island .desktop-menu a:hover:before {
+            width: 70%;
+        }
+        
+        @keyframes genie {
+            0% { transform: translateX(-50%) scaleY(0.1) scaleX(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scaleY(1) scaleX(1); opacity: 1; }
+        }
+        
+        /* Main Header Content */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar-toggler {
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+            cursor: pointer;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .logo:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        
+        /* Contact Info - Desktop */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Language Selector Dropdown */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .language-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .language-dropdown.active .language-btn i {
+            transform: rotate(180deg);
+        }
+        
+        .language-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 5px;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 10px;
+            padding: 5px 0;
+            min-width: 100px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .language-dropdown.active .language-menu {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 15px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* About Hero Section */
+        .about-hero {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 80px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('mining-background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero-text p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        /* About Content Sections */
+        .about-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-section {
+            margin-bottom: 60px;
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .about-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        .about-section p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: var(--glass-color);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--accent-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .footer-menu {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .footer-menu a:hover {
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .social-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px) scale(1.2);
+        }
+        
+        /* Contact Button - Mobile */
+        .contact-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--highlight-color), var(--accent-color));
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(46, 204, 113, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .contact-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+        }
+        
+        .contact-btn i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-btn:hover i {
+            transform: scale(1.1);
+        }
+        
+        .contact-menu {
+            position: fixed;
+            bottom: 82px;
+            right: 30px;
+            background: var(--glass-color);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 250px;
+            display: none;
+            z-index: 1000;
+            transform-origin: bottom right;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact-menu.active {
+            display: block;
+        }
+        
+        .contact-menu h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .contact-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        .contact-option i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 950px) {
+            .dynamic-island {
+                padding: 10px 15px;
+                gap: 10px;
+            }
+            
+            .dynamic-island .desktop-menu {
+                display: none;
+            }
+            
+            .dynamic-island .hamburger {
+                display: block;
+                order: 1;
+            }
+            
+            .dynamic-island .language-dropdown {
+                order: 2;
+                margin-left: auto;
+            }
+            
+            .dynamic-island .contact-info {
+                display: none;
+            }
+            
+            .header-content .contact-info {
+                display: none;
+            }
+            
+            .header-content .language-dropdown {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+            
+            .contact-btn {
+                display: flex;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 50vh;
+                margin-top: 70px;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-hero {
+                height: 40vh;
+            }
+            
+            .dynamic-island {
+                padding: 8px 12px;
+            }
+            
+            .dynamic-island .logo {
+                height: 30px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .contact-menu {
+                width: 220px;
+                right: 15px;
+            }
+            
+            .about-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Added white text for main menu */
+        .header-content .navbar-nav .nav-link {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Island Header -->
+    <div class="dynamic-island" id="dynamicIsland">
+        <img src="logo.png" alt="MG Australia Logo" class="logo" id="homeLogo">
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="desktop-menu">
+            <a href="index.html" data-translate="home">Home</a>
+            <a href="about.html" data-translate="about">About MG</a>
+            <a href="services.html" data-translate="services">Services</a>
+            <a href="contact.html" data-translate="contact">Contact</a>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="nav-links">
+                <li><a href="index.html" data-translate="home">Home</a></li>
+                <li><a href="about.html" data-translate="about">About MG</a></li>
+                <li><a href="services.html" data-translate="services">Services</a></li>
+                <li><a href="contact.html" data-translate="contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="contact-info">
+            <a href="mailto:rosariochoquenaira@gmail.com" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span data-translate="email">Email</span>
+            </a>
+            <a href="tel:0467660148" class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span data-translate="call">Call</span>
+            </a>
+            <a href="https://wa.me/61467760148" target="_blank" class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span data-translate="whatsapp">WhatsApp</span>
+            </a>
+        </div>
+        <div class="language-dropdown">
+            <button class="language-btn">
+                <span>EN</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="language-menu">
+                <a href="#" class="language-option" data-lang="en">English</a>
+                <a href="#" class="language-option" data-lang="es">Español</a>
+                <a href="#" class="language-option" data-lang="zh">中文</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Header -->
+    <div class="header-content glass">
+        <div class="logo-container">
+            <img src="logo.png" alt="MG Australia Logo" class="logo" id="homeLogo2">
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav-links navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link" data-translate="home">Home</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link" data-translate="about">About MG</a></li>
+                        <li class="nav-item"><a href="services.html" class="nav-link" data-translate="services">Services</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link" data-translate="contact">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="contact-info d-none d-lg-flex">
+                <a href="mailto:rosariochoquenaira@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span data-translate="email">Email</span>
+                </a>
+                <a href="tel:0467660148" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span data-translate="call">Call</span>
+                </a>
+                <a href="https://wa.me/61467760148" target="_blank" class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-translate="whatsapp">WhatsApp</span>
+                </a>
+            </div>
+            <div class="language-dropdown">
+                <button class="language-btn">
+                    <span>EN</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-menu">
+                    <a href="#" class="language-option" data-lang="en">English</a>
+                    <a href="#" class="language-option" data-lang="es">Español</a>
+                    <a href="#" class="language-option" data-lang="zh">中文</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="about-hero" data-aos="fade-in">
+        <div class="hero-text">
+            <h1 class="animate__animated animate__fadeInDown" data-translate="about_title">Our Story</h1>
+            <p class="animate__animated animate__fadeInUp" data-translate="about_subtitle">Pioneering sustainable mining solutions since 2010</p>
+        </div>
+    </section>
+    
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="about-section" data-aos="fade-up">
+            <h2 data-translate="about_heading1">Who We Are</h2>
+            <p data-translate="about_p1">MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction. Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement.</p>
+            
+            <p data-translate="about_p2">Over the past decade, we've successfully completed over 200 projects across Australia, each demonstrating our ability to balance economic viability with ecological responsibility. Our team now comprises 150+ specialists across geology, engineering, environmental science, and community relations. This diverse expertise allows us to approach mining challenges from multiple perspectives, ensuring comprehensive solutions.</p>
+            
+            <p data-translate="about_p3">Unlike traditional mining companies, we've invested heavily in renewable energy integration, developing proprietary systems that reduce our operations' carbon footprint by up to 60%. Our innovative reclamation techniques have restored over 5,000 hectares of land to thriving ecosystems, earning us multiple sustainability awards. We measure our success not just in mineral yields, but in positive environmental and social impact.</p>
+            
+            <p data-translate="about_p4">At the heart of our operations is a culture of continuous improvement. We allocate 15% of annual profits to research and development, partnering with universities and tech startups to pioneer cleaner extraction methods. Our recent breakthroughs in bioleaching and drone-based surveying have set new industry standards for efficiency and minimal environmental disruption.</p>
+            
+            <p data-translate="about_p5">Looking ahead, we're committed to achieving net-zero emissions across all operations by 2035. This ambitious goal drives our current investments in hydrogen-powered equipment and AI-driven resource optimization. For MG Australia, mining isn't just about what we extract - it's about the legacy we leave through responsible innovation and meaningful community partnerships.</p>
+        </div>
+        
+        <div class="about-section" data-aos="fade-up">
+            <h2 data-translate="team_heading">Our Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="team1.jpg" alt="CEO">
+                    <h3 data-translate="team1_name">Rosario Choquenaira Florez</h3>
+                    <p data-translate="team1_role">CEO & Founder</p>
+                    <p data-translate="team1_bio">Rosario is the CEO and Founder of MG Australia, a company committed to strengthening and advancing mining operations and partnerships between Peru and Australia.</p>
+                    <p data-translate="team1_bio2">With a deep understanding of the mining industry and a strong vision for innovation and sustainability, Rosario established MG Australia to bridge the gap between two of the world's most resource-rich countries. Her leadership is focused on improving the efficiency, quality, and global collaboration of mining processes — from resource development to export logistics.</p>
+                    <p data-translate="team1_bio3">Rosario brings a unique perspective shaped by her Peruvian heritage and her experience in the Australian sector. She is dedicated to building stronger international connections, promoting ethical practices, and driving progress across both continents.</p>
+                    <p data-translate="team1_bio4">Under her guidance, MG Australia is not only a company — it is a mission to create smarter, more sustainable mining solutions that benefit both people and the planet.</p>
+                </div>
+                <div class="team-member">
+                    <img src="team2.jpg" alt="Leader">
+                    <h3 data-translate="team2_name">Luis Enrique Yhui Jordan</h3>
+                    <p data-translate="team2_role">Leader of MG Australia</p>
+                    <p data-translate="team2_bio">Luis serves as the Leader of MG Australia and is also the CEO of the Peru Australia WA Consular, where he plays a pivotal role in strengthening diplomatic, business, and cultural ties between Peru and Western Australia.</p>
+                    <p data-translate="team2_bio2">With a strong background in leadership, international relations, and cross-border collaboration, Luis brings strategic vision and direction to MG Australia. His work is focused on advancing partnerships that benefit both nations, particularly in the mining, trade, and innovation sectors.</p>
+                    <p data-translate="team2_bio3">At MG Australia, Luis provides high-level leadership, guiding long-term goals and ensuring that the company operates with integrity, excellence, and a global perspective. His diplomatic expertise allows MG Australia to form strong relationships with key partners and expand its impact both locally and internationally.</p>
+                    <p data-translate="team2_bio4">Luis is passionate about creating opportunities, building sustainable industries, and inspiring future generations through meaningful international cooperation.</p>
+                </div>
+                <div class="team-member">
+                    <img src="team3.jpg" alt="Software Designer">
+                    <h3 data-translate="team3_name">Gerard Enrique Yhui Choquenaira</h3>
+                    <p data-translate="team3_role">Software and Web Page Designer</p>
+                    <p data-translate="team3_bio">Hello, my name is Gerard, and I am the Software Designer at MG Australia.</p>
+                    <p data-translate="team3_bio2">Despite being 10 years old, I have developed strong proficiency in multiple programming languages, including Python, HTML, CSS, JavaScript, PHP, and C++. I am passionate about software development and dedicated to continuously learning and refining my skills.</p>
+                    <p data-translate="team3_bio3">At MG Australia, I am responsible for the technical design and implementation of web-based solutions. My work involves building reliable, efficient, and user-friendly software that meets modern standards. I take great pride in writing clean code, solving complex problems, and contributing to high-quality digital experiences.</p>
+                    <p data-translate="team3_bio4">I believe that with the right mindset, age is no barrier to excellence. Through focus, curiosity, and hard work, I aim to push the boundaries of what's possible — one project at a time.</p>
+                    <p data-translate="team3_bio5">Thank you for visiting MG Australia. I look forward to sharing more of my work with you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-menu">
+                <a href="index.html" data-translate="home">Home</a>
+                <a href="about.html" data-translate="about">About MG</a>
+                <a href="services.html" data-translate="services">Services</a>
+                <a href="contact.html" data-translate="contact">Contact</a>
+                <a href="privacy.html" data-translate="privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="terms">Terms of Service</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="copyright mt-3" data-translate="copyright">
+                &copy; 2025 MG Australia. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Contact Button - Mobile -->
+    <div class="contact-btn" id="contactBtn">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <div class="contact-menu" id="contactMenu">
+        <h3 data-translate="help">Contact Us</h3>
+        <a href="mailto:rosariochoquenaira@gmail.com" class="contact-option">
+            <i class="fas fa-envelope"></i> <span data-translate="email">Email</span>
+        </a>
+        <a href="tel:0467660148" class="contact-option">
+            <i class="fas fa-phone"></i> <span data-translate="call">Call</span>
+        </a>
+        <a href="https://wa.me/61467760148" target="_blank" class="contact-option">
+            <i class="fab fa-whatsapp"></i> <span data-translate="whatsapp">WhatsApp</span>
+        </a>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Page load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Complete Language Translation System
+        const translations = {
+            en: {
+                home: "Home",
+                about: "About MG",
+                services: "Services",
+                contact: "Contact",
+                help: "Contact Us",
+                email: "Email",
+                call: "Call",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG Australia. All rights reserved.",
+                about_title: "Our Story",
+                about_subtitle: "Pioneering sustainable mining solutions since 2010",
+                about_heading1: "Who We Are",
+                about_p1: "MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction. Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement.",
+                about_p2: "Over the past decade, we've successfully completed over 200 projects across Australia, each demonstrating our ability to balance economic viability with ecological responsibility. Our team now comprises 150+ specialists across geology, engineering, environmental science, and community relations. This diverse expertise allows us to approach mining challenges from multiple perspectives, ensuring comprehensive solutions.",
+                about_p3: "Unlike traditional mining companies, we've invested heavily in renewable energy integration, developing proprietary systems that reduce our operations' carbon footprint by up to 60%. Our innovative reclamation techniques have restored over 5,000 hectares of land to thriving ecosystems, earning us multiple sustainability awards. We measure our success not just in mineral yields, but in positive environmental and social impact.",
+                about_p4: "At the heart of our operations is a culture of continuous improvement. We allocate 15% of annual profits to research and development, partnering with universities and tech startups to pioneer cleaner extraction methods. Our recent breakthroughs in bioleaching and drone-based surveying have set new industry standards for efficiency and minimal environmental disruption.",
+                about_p5: "Looking ahead, we're committed to achieving net-zero emissions across all operations by 2035. This ambitious goal drives our current investments in hydrogen-powered equipment and AI-driven resource optimization. For MG Australia, mining isn't just about what we extract - it's about the legacy we leave through responsible innovation and meaningful community partnerships.",
+                team_heading: "Our Leadership Team",
+                team1_name: "Rosario Choquenaira Florez",
+                team1_role: "CEO & Founder",
+                team1_bio: "Rosario is the CEO and Founder of MG Australia, a company committed to strengthening and advancing mining operations and partnerships between Peru and Australia.",
+                team1_bio2: "With a deep understanding of the mining industry and a strong vision for innovation and sustainability, Rosario established MG Australia to bridge the gap between two of the world's most resource-rich countries. Her leadership is focused on improving the efficiency, quality, and global collaboration of mining processes — from resource development to export logistics.",
+                team1_bio3: "Rosario brings a unique perspective shaped by her Peruvian heritage and her experience in the Australian sector. She is dedicated to building stronger international connections, promoting ethical practices, and driving progress across both continents.",
+                team1_bio4: "Under her guidance, MG Australia is not only a company — it is a mission to create smarter, more sustainable mining solutions that benefit both people and the planet.",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "Leader of MG Australia",
+                team2_bio: "Luis serves as the Leader of MG Australia and is also the CEO of the Peru Australia WA Consular, where he plays a pivotal role in strengthening diplomatic, business, and cultural ties between Peru and Western Australia.",
+                team2_bio2: "With a strong background in leadership, international relations, and cross-border collaboration, Luis brings strategic vision and direction to MG Australia. His work is focused on advancing partnerships that benefit both nations, particularly in the mining, trade, and innovation sectors.",
+                team2_bio3: "At MG Australia, Luis provides high-level leadership, guiding long-term goals and ensuring that the company operates with integrity, excellence, and a global perspective. His diplomatic expertise allows MG Australia to form strong relationships with key partners and expand its impact both locally and internationally.",
+                team2_bio4: "Luis is passionate about creating opportunities, building sustainable industries, and inspiring future generations through meaningful international cooperation.",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "Software and Web Page Designer",
+                team3_bio: "Hello, my name is Gerard, and I am the Software Designer at MG Australia.",
+                team3_bio2: "Despite being 10 years old, I have developed strong proficiency in multiple programming languages, including Python, HTML, CSS, JavaScript, PHP, and C++. I am passionate about software development and dedicated to continuously learning and refining my skills.",
+                team3_bio3: "At MG Australia, I am responsible for the technical design and implementation of web-based solutions. My work involves building reliable, efficient, and user-friendly software that meets modern standards. I take great pride in writing clean code, solving complex problems, and contributing to high-quality digital experiences.",
+                team3_bio4: "I believe that with the right mindset, age is no barrier to excellence. Through focus, curiosity, and hard work, I aim to push the boundaries of what's possible — one project at a time.",
+                team3_bio5: "Thank you for visiting MG Australia. I look forward to sharing more of my work with you.",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service"
+            },
+            es: {
+                home: "Inicio",
+                about: "Sobre MG",
+                services: "Servicios",
+                contact: "Contacto",
+                help: "Contáctenos",
+                email: "Correo",
+                call: "Llamar",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG Australia. Todos los derechos reservados.",
+                about_title: "Nuestra Historia",
+                about_subtitle: "Pioneros en soluciones mineras sostenibles desde 2010",
+                about_heading1: "Quiénes Somos",
+                about_p1: "MG Australia fue fundada en 2010 con la visión de revolucionar la industria minera mediante prácticas sostenibles y tecnología de vanguardia. Lo que comenzó como un pequeño equipo de geólogos e ingenieros apasionados se ha convertido en un líder reconocido a nivel nacional en exploración y extracción de minerales. Nuestro viaje ha sido guiado por un compromiso inquebrantable con la gestión ambiental y la participación comunitaria.",
+                about_p2: "En la última década, hemos completado con éxito más de 200 proyectos en toda Australia, cada uno demostrando nuestra capacidad para equilibrar la viabilidad económica con la responsabilidad ecológica. Nuestro equipo ahora comprende más de 150 especialistas en geología, ingeniería, ciencias ambientales y relaciones comunitarias. Esta diversidad de experiencia nos permite abordar los desafíos mineros desde múltiples perspectivas, asegurando soluciones integrales.",
+                about_p3: "A diferencia de las empresas mineras tradicionales, hemos invertido fuertemente en la integración de energías renovables, desarrollando sistemas propios que reducen la huella de carbono de nuestras operaciones hasta en un 60%. Nuestras innovadoras técnicas de recuperación han restaurado más de 5,000 hectáreas de tierra a ecosistemas prósperos, lo que nos ha valido múltiples premios de sostenibilidad. Medimos nuestro éxito no solo en rendimientos minerales, sino en el impacto ambiental y social positivo.",
+                about_p4: "En el corazón de nuestras operaciones hay una cultura de mejora continua. Destinamos el 15% de las ganancias anuales a investigación y desarrollo, asociándonos con universidades y startups tecnológicas para pionear métodos de extracción más limpios. Nuestros recientes avances en biolixiviación y prospección con drones han establecido nuevos estándares industriales para la eficiencia y la mínima perturbación ambiental.",
+                about_p5: "De cara al futuro, estamos comprometidos a lograr cero emisiones netas en todas nuestras operaciones para 2035. Este ambicioso objetivo impulsa nuestras actuales inversiones en equipos impulsados por hidrógeno y optimización de recursos impulsada por IA. Para MG Australia, la minería no se trata solo de lo que extraemos, sino del legado que dejamos a través de la innovación responsable y las asociaciones comunitarias significativas.",
+                team_heading: "Nuestro Equipo Directivo",
+                team1_name: "Rosario Choquenaira Florez",
+                team1_role: "CEO y Fundadora",
+                team1_bio: "Rosario es la CEO y Fundadora de MG Australia, una empresa comprometida con fortalecer y avanzar las operaciones mineras y las asociaciones entre Perú y Australia.",
+                team1_bio2: "Con un profundo conocimiento de la industria minera y una fuerte visión para la innovación y sostenibilidad, Rosario estableció MG Australia para cerrar la brecha entre dos de los países más ricos en recursos del mundo. Su liderazgo se centra en mejorar la eficiencia, calidad y colaboración global de los procesos mineros, desde el desarrollo de recursos hasta la logística de exportación.",
+                team1_bio3: "Rosario aporta una perspectiva única moldeada por su herencia peruana y su experiencia en el sector australiano. Está dedicada a construir conexiones internacionales más fuertes, promover prácticas éticas e impulsar el progreso en ambos continentes.",
+                team1_bio4: "Bajo su guía, MG Australia no es solo una empresa, es una misión para crear soluciones mineras más inteligentes y sostenibles que beneficien tanto a las personas como al planeta.",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "Líder de MG Australia",
+                team2_bio: "Luis se desempeña como Líder de MG Australia y también es CEO del Consulado Perú Australia WA, donde juega un papel fundamental en el fortalecimiento de los lazos diplomáticos, comerciales y culturales entre Perú y Australia Occidental.",
+                team2_bio2: "Con una sólida formación en liderazgo, relaciones internacionales y colaboración transfronteriza, Luis aporta visión estratégica y dirección a MG Australia. Su trabajo se centra en promover asociaciones que beneficien a ambas naciones, particularmente en los sectores minero, comercial y de innovación.",
+                team2_bio3: "En MG Australia, Luis proporciona liderazgo de alto nivel, guiando objetivos a largo plazo y asegurando que la empresa opere con integridad, excelencia y una perspectiva global. Su experiencia diplomática permite a MG Australia formar relaciones sólidas con socios clave y expandir su impacto tanto local como internacionalmente.",
+                team2_bio4: "Luis es apasionado por crear oportunidades, construir industrias sostenibles e inspirar a las futuras generaciones a través de una cooperación internacional significativa.",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "Diseñador de Software y Páginas Web",
+                team3_bio: "Hola, mi nombre es Gerard y soy el Diseñador de Software en MG Australia.",
+                team3_bio2: "A pesar de tener solo 10 años, he desarrollado una gran competencia en múltiples lenguajes de programación, incluyendo Python, HTML, CSS, JavaScript, PHP y C++. Soy apasionado por el desarrollo de software y dedicado a aprender y perfeccionar continuamente mis habilidades.",
+                team3_bio3: "En MG Australia, soy responsable del diseño técnico e implementación de soluciones web. Mi trabajo implica construir software confiable, eficiente y fácil de usar que cumpla con los estándares modernos. Me enorgullezco de escribir código limpio, resolver problemas complejos y contribuir a experiencias digitales de alta calidad.",
+                team3_bio4: "Creo que con la mentalidad correcta, la edad no es una barrera para la excelencia. A través del enfoque, la curiosidad y el trabajo duro, aspiro a expandir los límites de lo posible, un proyecto a la vez.",
+                team3_bio5: "Gracias por visitar MG Australia. Espero compartir más de mi trabajo con ustedes.",
+                privacy: "Política de Privacidad",
+                terms: "Términos de Servicio"
+            },
+            zh: {
+                home: "首页",
+                about: "关于MG",
+                services: "服务",
+                contact: "联系我们",
+                help: "联系我们",
+                email: "电子邮件",
+                call: "电话",
+                whatsapp: "WhatsApp",
+                copyright: "© 2025 MG澳大利亚。保留所有权利。",
+                about_title: "我们的故事",
+                about_subtitle: "自2010年以来开创可持续采矿解决方案",
+                about_heading1: "我们是谁",
+                about_p1: "MG澳大利亚成立于2010年，旨在通过可持续实践和尖端技术彻底改变采矿业。最初只是一小群充满激情的地质学家和工程师，如今已发展成为全国公认的矿产勘探和开采领导者。我们的旅程始终秉持对环境管理和社区参与的不懈承诺。",
+                about_p2: "在过去十年中，我们成功完成了澳大利亚各地200多个项目，每个项目都展示了我们在经济可行性与生态责任之间取得平衡的能力。我们的团队现在由150多名地质学、工程学、环境科学和社区关系专家组成。这种多样化的专业知识使我们能够从多个角度应对采矿挑战，确保全面的解决方案。",
+                about_p3: "与传统矿业公司不同，我们大力投资于可再生能源整合，开发了专有系统，将运营的碳足迹减少高达60%。我们创新的复垦技术已将5000多公顷土地恢复为繁荣的生态系统，为我们赢得了多项可持续发展奖项。我们衡量成功的标准不仅是矿产产量，还包括积极的环境和社会影响。",
+                about_p4: "我们运营的核心是持续改进的文化。我们将年利润的15%分配给研发，与大学和科技初创公司合作，开创更清洁的提取方法。我们在生物浸出和无人机勘测方面的最新突破为效率和最小环境干扰设定了新的行业标准。",
+                about_p5: "展望未来，我们致力于到2035年实现所有运营的净零排放。这一雄心勃勃的目标推动了我们目前对氢动力设备和人工智能驱动资源优化的投资。对MG澳大利亚来说，采矿不仅关乎我们提取什么，更关乎我们通过负责任的创新和有意义的社区合作留下的遗产。",
+                team_heading: "我们的领导团队",
+                team1_name: "Rosario Choquenaira Florez",
+                team1_role: "首席执行官兼创始人",
+                team1_bio: "Rosario是MG澳大利亚的首席执行官兼创始人，该公司致力于加强和推进秘鲁与澳大利亚之间的采矿运营和合作伙伴关系。",
+                team1_bio2: "凭借对采矿行业的深刻理解和创新与可持续发展的强烈愿景，Rosario创立了MG澳大利亚，以弥合世界上两个资源最丰富国家之间的差距。她的领导力专注于提高采矿过程的效率、质量和全球协作——从资源开发到出口物流。",
+                team1_bio3: "Rosario带来了独特的视角，这源于她的秘鲁传统和在澳大利亚行业的经验。她致力于建立更强大的国际联系，促进道德实践，并推动两个大陆的进步。",
+                team1_bio4: "在她的指导下，MG澳大利亚不仅是一家公司，更是一项使命，旨在创造更智能、更可持续的采矿解决方案，造福人类和地球。",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "MG澳大利亚领导者",
+                team2_bio: "Luis担任MG澳大利亚的领导者，同时也是秘鲁澳大利亚西澳领事馆的首席执行官，他在加强秘鲁与西澳大利亚之间的外交、商业和文化联系方面发挥着关键作用。",
+                team2_bio2: "凭借在领导力、国际关系和跨境合作方面的强大背景，Luis为MG澳大利亚带来了战略愿景和方向。他的工作重点是推进使两国受益的合作伙伴关系，特别是在采矿、贸易和创新领域。",
+                team2_bio3: "在MG澳大利亚，Luis提供高层领导，指导长期目标并确保公司以诚信、卓越和全球视野运营。他的外交专业知识使MG澳大利亚能够与关键合作伙伴建立牢固的关系，并在本地和国际上扩大其影响力。",
+                team2_bio4: "Luis热衷于创造机会、建设可持续产业，并通过有意义的国际合作激励后代。",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "软件和网页设计师",
+                team3_bio: "你好，我的名字是Gerard，我是MG澳大利亚的软件设计师。",
+                team3_bio2: "尽管只有10岁，但我已经熟练掌握了多种编程语言，包括Python、HTML、CSS、JavaScript、PHP和C++。我对软件开发充满热情，并致力于不断学习和完善我的技能。",
+                team3_bio3: "在MG澳大利亚，我负责基于Web的解决方案的技术设计和实现。我的工作涉及构建可靠、高效且用户友好的软件，以满足现代标准。我以编写干净代码、解决复杂问题并为高质量数字体验做出贡献而自豪。",
+                team3_bio4: "我相信，只要有正确的心态，年龄就不是追求卓越的障碍。通过专注、好奇心和努力工作，我旨在一次一个项目地突破可能的界限。",
+                team3_bio5: "感谢您访问MG澳大利亚。我期待与您分享更多我的作品。",
+                privacy: "隐私政策",
+                terms: "服务条款"
+            }
+        };
+
+        // Apply translations to the page
+        function applyTranslations(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update dropdown button text
+            const dropdownBtns = document.querySelectorAll('.language-btn span');
+            dropdownBtns.forEach(btn => {
+                if (lang === 'en') btn.textContent = 'EN';
+                else if (lang === 'es') btn.textContent = 'ES';
+                else if (lang === 'zh') btn.textContent = '中文';
+            });
+            
+            localStorage.setItem('language', lang);
+        }
+
+        // Initialize with saved language or default
+        const currentLang = localStorage.getItem('language') || 'en';
+        applyTranslations(currentLang);
+
+        // Language dropdown functionality
+        document.querySelectorAll('.language-dropdown .language-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.closest('.language-dropdown');
+                dropdown.classList.toggle('active');
+            });
+        });
+        
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                applyTranslations(lang);
+                this.closest('.language-dropdown').classList.remove('active');
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-dropdown')) {
+                document.querySelectorAll('.language-dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Dynamic Island Header - Only appears when main header is not visible
+        const dynamicIsland = document.getElementById('dynamicIsland');
+        const headerContent = document.querySelector('.header-content');
+        const dynamicHamburger = document.querySelector('.dynamic-island .hamburger');
+        
+        function checkHeaderVisibility() {
+            const headerRect = headerContent.getBoundingClientRect();
+            const isHeaderVisible = headerRect.bottom > 0;
+            
+            if (!isHeaderVisible) {
+                dynamicIsland.classList.add('visible');
+            } else {
+                dynamicIsland.classList.remove('visible');
+                dynamicIsland.classList.remove('expanded');
+                dynamicIsland.querySelector('.navbar-collapse').style.display = 'none';
+            }
+        }
+        
+        // Dynamic Island Hamburger
+        dynamicHamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dynamicIsland.classList.toggle('expanded');
+            const navCollapse = dynamicIsland.querySelector('.navbar-collapse');
+            if (dynamicIsland.classList.contains('expanded')) {
+                navCollapse.style.display = 'block';
+            } else {
+                navCollapse.style.display = 'none';
+            }
+        });
+        
+        window.addEventListener('scroll', checkHeaderVisibility);
+        window.addEventListener('resize', checkHeaderVisibility);
+
+        // Contact Button Functionality - Mobile
+        const contactBtn = document.getElementById('contactBtn');
+        const contactMenu = document.getElementById('contactMenu');
+        
+        contactBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            contactMenu.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (!contactBtn.contains(e.target) && !contactMenu.contains(e.target)) {
+                contactMenu.classList.remove('active');
+            }
+        });
+        
+        // Logo click to home
+        document.getElementById('homeLogo').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+        document.getElementById('homeLogo2').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
