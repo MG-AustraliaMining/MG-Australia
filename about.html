@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About MG Australia - Professional Mining Services</title>
+    <title>MG Australia - Professional Mining Services</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -371,9 +371,18 @@
             justify-content: center;
             text-align: center;
             margin-top: 80px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('videobac.mp4');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
         
         .hero-text h1 {
@@ -415,11 +424,13 @@
             font-size: 1.1rem;
         }
         
+        /* Horizontal Team Grid */
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 30px;
             margin-top: 40px;
+            justify-content: center;
         }
         
         .team-member {
@@ -430,6 +441,9 @@
             text-align: center;
             transition: all 0.4s ease;
             border: 1px solid rgba(255,255,255,0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
         }
         
         .team-member:hover {
@@ -597,6 +611,39 @@
             color: var(--accent-color);
         }
         
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--highlight-color), var(--accent-color));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            box-shadow: 0 4px 20px rgba(46, 204, 113, 0.4);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 950px) {
             .dynamic-island {
@@ -694,6 +741,11 @@
                 padding: 30px 20px;
             }
         }
+
+        /* Added white text for main menu */
+        .header-content .navbar-nav .nav-link {
+            color: white !important;
+        }
     </style>
 </head>
 <body>
@@ -703,14 +755,12 @@
         <button class="hamburger"><i class="fas fa-bars"></i></button>
         <div class="desktop-menu">
             <a href="index.html" data-translate="home">Home</a>
-            <a href="about.html" data-translate="about">About MG</a>
             <a href="services.html" data-translate="services">Services</a>
             <a href="contact.html" data-translate="contact">Contact</a>
         </div>
         <div class="navbar-collapse">
             <ul class="nav-links">
                 <li><a href="index.html" data-translate="home">Home</a></li>
-                <li><a href="about.html" data-translate="about">About MG</a></li>
                 <li><a href="services.html" data-translate="services">Services</a></li>
                 <li><a href="contact.html" data-translate="contact">Contact</a></li>
             </ul>
@@ -753,7 +803,6 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="nav-links navbar-nav">
                         <li class="nav-item"><a href="index.html" class="nav-link" data-translate="home">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link" data-translate="about">About MG</a></li>
                         <li class="nav-item"><a href="services.html" class="nav-link" data-translate="services">Services</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link" data-translate="contact">Contact</a></li>
                     </ul>
@@ -791,6 +840,10 @@
     
     <!-- Hero Section -->
     <section class="about-hero" data-aos="fade-in">
+        <video autoplay muted loop class="hero-video">
+            <source src="videobac.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="hero-text">
             <h1 class="animate__animated animate__fadeInDown" data-translate="about_title">Our Story</h1>
             <p class="animate__animated animate__fadeInUp" data-translate="about_subtitle">Pioneering sustainable mining solutions since 2010</p>
@@ -801,15 +854,9 @@
     <section class="about-content">
         <div class="about-section" data-aos="fade-up">
             <h2 data-translate="about_heading1">Who We Are</h2>
-            <p data-translate="about_p1">MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction. Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement.</p>
+            <p data-translate="about_p1">MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction.</p>
             
-            <p data-translate="about_p2">Over the past decade, we've successfully completed over 200 projects across Australia, each demonstrating our ability to balance economic viability with ecological responsibility. Our team now comprises 150+ specialists across geology, engineering, environmental science, and community relations. This diverse expertise allows us to approach mining challenges from multiple perspectives, ensuring comprehensive solutions.</p>
-            
-            <p data-translate="about_p3">Unlike traditional mining companies, we've invested heavily in renewable energy integration, developing proprietary systems that reduce our operations' carbon footprint by up to 60%. Our innovative reclamation techniques have restored over 5,000 hectares of land to thriving ecosystems, earning us multiple sustainability awards. We measure our success not just in mineral yields, but in positive environmental and social impact.</p>
-            
-            <p data-translate="about_p4">At the heart of our operations is a culture of continuous improvement. We allocate 15% of annual profits to research and development, partnering with universities and tech startups to pioneer cleaner extraction methods. Our recent breakthroughs in bioleaching and drone-based surveying have set new industry standards for efficiency and minimal environmental disruption.</p>
-            
-            <p data-translate="about_p5">Looking ahead, we're committed to achieving net-zero emissions across all operations by 2035. This ambitious goal drives our current investments in hydrogen-powered equipment and AI-driven resource optimization. For MG Australia, mining isn't just about what we extract - it's about the legacy we leave through responsible innovation and meaningful community partnerships.</p>
+            <p data-translate="about_p2">Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement. We measure our success not just in mineral yields, but in positive environmental and social impact, creating smarter, more sustainable mining solutions that benefit both people and the planet.</p>
         </div>
         
         <div class="about-section" data-aos="fade-up">
@@ -817,21 +864,24 @@
             <div class="team-grid">
                 <div class="team-member">
                     <img src="team1.jpg" alt="CEO">
-                    <h3 data-translate="team1_name">Dr. Sarah Chen</h3>
+                    <h3 data-translate="team1_name">Rosario Choquenaira Florez</h3>
                     <p data-translate="team1_role">CEO & Founder</p>
-                    <p data-translate="team1_bio">20+ years in sustainable mining practices</p>
+                    <p data-translate="team1_bio">Rosario is the CEO and Founder of MG Australia, dedicated to enhancing and modernising mining collaboration between Peru and Australia. With a strong vision for sustainable growth and international partnership, she leads the company with a focus on innovation, efficiency, and ethical industry practices.</p>
+                    <p data-translate="team1_bio2">Her leadership bridges two resource-rich nations, aiming to create long-term benefits for both communities and the environment.</p>
                 </div>
                 <div class="team-member">
-                    <img src="team2.jpg" alt="CTO">
-                    <h3 data-translate="team2_name">Michael Rodriguez</h3>
-                    <p data-translate="team2_role">Chief Technology Officer</p>
-                    <p data-translate="team2_bio">Pioneer in clean extraction technologies</p>
+                    <img src="team2.jpg" alt="Leader">
+                    <h3 data-translate="team2_name">Luis Enrique Yhui Jordan</h3>
+                    <p data-translate="team2_role">Leader of MG Australia</p>
+                    <p data-translate="team2_bio">Luis is the Leader of MG Australia and CEO of the Peru Australia WA Consular, where he focuses on strengthening diplomatic, economic, and cultural ties between Peru and Western Australia.</p>
+                    <p data-translate="team2_bio2">With extensive experience in international relations and strategic leadership, he guides MG Australia's mission to connect industries across continents, particularly in the mining sector, while promoting cooperation, sustainability, and long-term development.</p>
                 </div>
                 <div class="team-member">
-                    <img src="team3.jpg" alt="CSO">
-                    <h3 data-translate="team3_name">Emma Wilson</h3>
-                    <p data-translate="team3_role">Chief Sustainability Officer</p>
-                    <p data-translate="team3_bio">Environmental policy expert</p>
+                    <img src="team3.jpg" alt="Software Designer">
+                    <h3 data-translate="team3_name">Gerard Enrique Yhui Choquenaira</h3>
+                    <p data-translate="team3_role">Software Designer</p>
+                    <p data-translate="team3_bio">Gerard is the Software Designer at MG Australia, with advanced coding skills in Python, HTML, CSS, JavaScript, PHP, and C++. At just 10 years old, he brings exceptional creativity and technical ability to the team.</p>
+                    <p data-translate="team3_bio2">Passionate about technology and committed to learning, Gerard plays a key role in shaping MG Australia's software systems, proving that innovation knows no age.</p>
                 </div>
             </div>
         </div>
@@ -841,7 +891,6 @@
         <div class="footer-content">
             <div class="footer-menu">
                 <a href="index.html" data-translate="home">Home</a>
-                <a href="about.html" data-translate="about">About MG</a>
                 <a href="services.html" data-translate="services">Services</a>
                 <a href="contact.html" data-translate="contact">Contact</a>
                 <a href="privacy.html" data-translate="privacy">Privacy Policy</a>
@@ -878,6 +927,11 @@
         </a>
     </div>
     
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS JS -->
@@ -900,7 +954,6 @@
         const translations = {
             en: {
                 home: "Home",
-                about: "About MG",
                 services: "Services",
                 contact: "Contact",
                 help: "Contact Us",
@@ -911,27 +964,26 @@
                 about_title: "Our Story",
                 about_subtitle: "Pioneering sustainable mining solutions since 2010",
                 about_heading1: "Who We Are",
-                about_p1: "MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction. Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement.",
-                about_p2: "Over the past decade, we've successfully completed over 200 projects across Australia, each demonstrating our ability to balance economic viability with ecological responsibility. Our team now comprises 150+ specialists across geology, engineering, environmental science, and community relations. This diverse expertise allows us to approach mining challenges from multiple perspectives, ensuring comprehensive solutions.",
-                about_p3: "Unlike traditional mining companies, we've invested heavily in renewable energy integration, developing proprietary systems that reduce our operations' carbon footprint by up to 60%. Our innovative reclamation techniques have restored over 5,000 hectares of land to thriving ecosystems, earning us multiple sustainability awards. We measure our success not just in mineral yields, but in positive environmental and social impact.",
-                about_p4: "At the heart of our operations is a culture of continuous improvement. We allocate 15% of annual profits to research and development, partnering with universities and tech startups to pioneer cleaner extraction methods. Our recent breakthroughs in bioleaching and drone-based surveying have set new industry standards for efficiency and minimal environmental disruption.",
-                about_p5: "Looking ahead, we're committed to achieving net-zero emissions across all operations by 2035. This ambitious goal drives our current investments in hydrogen-powered equipment and AI-driven resource optimization. For MG Australia, mining isn't just about what we extract - it's about the legacy we leave through responsible innovation and meaningful community partnerships.",
+                about_p1: "MG Australia was founded in 2010 with a vision to revolutionize the mining industry through sustainable practices and cutting-edge technology. What began as a small team of passionate geologists and engineers has grown into a nationally recognized leader in mineral exploration and extraction.",
+                about_p2: "Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement. We measure our success not just in mineral yields, but in positive environmental and social impact, creating smarter, more sustainable mining solutions that benefit both people and the planet.",
                 team_heading: "Our Leadership Team",
-                team1_name: "Dr. Sarah Chen",
+                team1_name: "Rosario Choquenaira Florez",
                 team1_role: "CEO & Founder",
-                team1_bio: "20+ years in sustainable mining practices",
-                team2_name: "Michael Rodriguez",
-                team2_role: "Chief Technology Officer",
-                team2_bio: "Pioneer in clean extraction technologies",
-                team3_name: "Emma Wilson",
-                team3_role: "Chief Sustainability Officer",
-                team3_bio: "Environmental policy expert",
+                team1_bio: "Rosario is the CEO and Founder of MG Australia, dedicated to enhancing and modernising mining collaboration between Peru and Australia. With a strong vision for sustainable growth and international partnership, she leads the company with a focus on innovation, efficiency, and ethical industry practices.",
+                team1_bio2: "Her leadership bridges two resource-rich nations, aiming to create long-term benefits for both communities and the environment.",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "Leader of MG Australia",
+                team2_bio: "Luis is the Leader of MG Australia and CEO of the Peru Australia WA Consular, where he focuses on strengthening diplomatic, economic, and cultural ties between Peru and Western Australia.",
+                team2_bio2: "With extensive experience in international relations and strategic leadership, he guides MG Australia's mission to connect industries across continents, particularly in the mining sector, while promoting cooperation, sustainability, and long-term development.",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "Software Designer",
+                team3_bio: "Gerard is the Software Designer at MG Australia, with advanced coding skills in Python, HTML, CSS, JavaScript, PHP, and C++. At just 10 years old, he brings exceptional creativity and technical ability to the team.",
+                team3_bio2: "Passionate about technology and committed to learning, Gerard plays a key role in shaping MG Australia's software systems, proving that innovation knows no age.",
                 privacy: "Privacy Policy",
                 terms: "Terms of Service"
             },
             es: {
                 home: "Inicio",
-                about: "Sobre MG",
                 services: "Servicios",
                 contact: "Contacto",
                 help: "Contáctenos",
@@ -942,27 +994,26 @@
                 about_title: "Nuestra Historia",
                 about_subtitle: "Pioneros en soluciones mineras sostenibles desde 2010",
                 about_heading1: "Quiénes Somos",
-                about_p1: "MG Australia fue fundada en 2010 con la visión de revolucionar la industria minera mediante prácticas sostenibles y tecnología de vanguardia. Lo que comenzó como un pequeño equipo de geólogos e ingenieros apasionados se ha convertido en un líder reconocido a nivel nacional en exploración y extracción de minerales. Nuestro viaje ha sido guiado por un compromiso inquebrantable con la gestión ambiental y la participación comunitaria.",
-                about_p2: "En la última década, hemos completado con éxito más de 200 proyectos en toda Australia, cada uno demostrando nuestra capacidad para equilibrar la viabilidad económica con la responsabilidad ecológica. Nuestro equipo ahora comprende más de 150 especialistas en geología, ingeniería, ciencias ambientales y relaciones comunitarias. Esta diversidad de experiencia nos permite abordar los desafíos mineros desde múltiples perspectivas, asegurando soluciones integrales.",
-                about_p3: "A diferencia de las empresas mineras tradicionales, hemos invertido fuertemente en la integración de energías renovables, desarrollando sistemas propios que reducen la huella de carbono de nuestras operaciones hasta en un 60%. Nuestras innovadoras técnicas de recuperación han restaurado más de 5,000 hectáreas de tierra a ecosistemas prósperos, lo que nos ha valido múltiples premios de sostenibilidad. Medimos nuestro éxito no solo en rendimientos minerales, sino en el impacto ambiental y social positivo.",
-                about_p4: "En el corazón de nuestras operaciones hay una cultura de mejora continua. Destinamos el 15% de las ganancias anuales a investigación y desarrollo, asociándonos con universidades y startups tecnológicas para pionear métodos de extracción más limpios. Nuestros recientes avances en biolixiviación y prospección con drones han establecido nuevos estándares industriales para la eficiencia y la mínima perturbación ambiental.",
-                about_p5: "De cara al futuro, estamos comprometidos a lograr cero emisiones netas en todas nuestras operaciones para 2035. Este ambicioso objetivo impulsa nuestras actuales inversiones en equipos impulsados por hidrógeno y optimización de recursos impulsada por IA. Para MG Australia, la minería no se trata solo de lo que extraemos, sino del legado que dejamos a través de la innovación responsable y las asociaciones comunitarias significativas.",
+                about_p1: "MG Australia fue fundada en 2010 con la visión de revolucionar la industria minera mediante prácticas sostenibles y tecnología de vanguardia. Lo que comenzó como un pequeño equipo de geólogos e ingenieros apasionados se ha convertido en un líder reconocido a nivel nacional en exploración y extracción de minerales.",
+                about_p2: "Nuestro viaje ha sido guiado por un compromiso inquebrantable con la gestión ambiental y la participación comunitaria. Medimos nuestro éxito no solo en rendimientos minerales, sino en el impacto ambiental y social positivo, creando soluciones mineras más inteligentes y sostenibles que benefician tanto a las personas como al planeta.",
                 team_heading: "Nuestro Equipo Directivo",
-                team1_name: "Dra. Sarah Chen",
+                team1_name: "Rosario Choquenaira Florez",
                 team1_role: "CEO y Fundadora",
-                team1_bio: "20+ años en prácticas mineras sostenibles",
-                team2_name: "Michael Rodriguez",
-                team2_role: "Director de Tecnología",
-                team2_bio: "Pionero en tecnologías de extracción limpia",
-                team3_name: "Emma Wilson",
-                team3_role: "Directora de Sostenibilidad",
-                team3_bio: "Experta en políticas ambientales",
+                team1_bio: "Rosario es la CEO y Fundadora de MG Australia, dedicada a mejorar y modernizar la colaboración minera entre Perú y Australia. Con una fuerte visión para el crecimiento sostenible y la asociación internacional, lidera la empresa con un enfoque en innovación, eficiencia y prácticas industriales éticas.",
+                team1_bio2: "Su liderazgo une a dos naciones ricas en recursos, con el objetivo de crear beneficios a largo plazo tanto para las comunidades como para el medio ambiente.",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "Líder de MG Australia",
+                team2_bio: "Luis es el Líder de MG Australia y CEO del Consulado Perú Australia WA, donde se enfoca en fortalecer los lazos diplomáticos, económicos y culturales entre Perú y Australia Occidental.",
+                team2_bio2: "Con amplia experiencia en relaciones internacionales y liderazgo estratégico, guía la misión de MG Australia para conectar industrias entre continentes, particularmente en el sector minero, mientras promueve la cooperación, la sostenibilidad y el desarrollo a largo plazo.",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "Diseñador de Software",
+                team3_bio: "Gerard es el Diseñador de Software en MG Australia, con habilidades avanzadas de codificación en Python, HTML, CSS, JavaScript, PHP y C++. Con solo 10 años, aporta una creatividad excepcional y capacidad técnica al equipo.",
+                team3_bio2: "Apasionado por la tecnología y comprometido con el aprendizaje, Gerard juega un papel clave en la configuración de los sistemas de software de MG Australia, demostrando que la innovación no conoce edad.",
                 privacy: "Política de Privacidad",
                 terms: "Términos de Servicio"
             },
             zh: {
                 home: "首页",
-                about: "关于MG",
                 services: "服务",
                 contact: "联系我们",
                 help: "联系我们",
@@ -973,21 +1024,21 @@
                 about_title: "我们的故事",
                 about_subtitle: "自2010年以来开创可持续采矿解决方案",
                 about_heading1: "我们是谁",
-                about_p1: "MG澳大利亚成立于2010年，旨在通过可持续实践和尖端技术彻底改变采矿业。最初只是一小群充满激情的地质学家和工程师，如今已发展成为全国公认的矿产勘探和开采领导者。我们的旅程始终秉持对环境管理和社区参与的不懈承诺。",
-                about_p2: "在过去十年中，我们成功完成了澳大利亚各地200多个项目，每个项目都展示了我们在经济可行性与生态责任之间取得平衡的能力。我们的团队现在由150多名地质学、工程学、环境科学和社区关系专家组成。这种多样化的专业知识使我们能够从多个角度应对采矿挑战，确保全面的解决方案。",
-                about_p3: "与传统矿业公司不同，我们大力投资于可再生能源整合，开发了专有系统，将运营的碳足迹减少高达60%。我们创新的复垦技术已将5000多公顷土地恢复为繁荣的生态系统，为我们赢得了多项可持续发展奖项。我们衡量成功的标准不仅是矿产产量，还包括积极的环境和社会影响。",
-                about_p4: "我们运营的核心是持续改进的文化。我们将年利润的15%分配给研发，与大学和科技初创公司合作，开创更清洁的提取方法。我们在生物浸出和无人机勘测方面的最新突破为效率和最小环境干扰设定了新的行业标准。",
-                about_p5: "展望未来，我们致力于到2035年实现所有运营的净零排放。这一雄心勃勃的目标推动了我们目前对氢动力设备和人工智能驱动资源优化的投资。对MG澳大利亚来说，采矿不仅关乎我们提取什么，更关乎我们通过负责任的创新和有意义的社区合作留下的遗产。",
+                about_p1: "MG澳大利亚成立于2010年，旨在通过可持续实践和尖端技术彻底改变采矿业。最初只是一小群充满激情的地质学家和工程师，如今已发展成为全国公认的矿产勘探和开采领导者。",
+                about_p2: "我们的旅程始终秉持对环境管理和社区参与的不懈承诺。我们衡量成功的标准不仅是矿产产量，还包括积极的环境和社会影响，创造更智能、更可持续的采矿解决方案，造福人类和地球。",
                 team_heading: "我们的领导团队",
-                team1_name: "Sarah Chen博士",
+                team1_name: "Rosario Choquenaira Florez",
                 team1_role: "首席执行官兼创始人",
-                team1_bio: "20多年可持续采矿实践经验",
-                team2_name: "Michael Rodriguez",
-                team2_role: "首席技术官",
-                team2_bio: "清洁提取技术先驱",
-                team3_name: "Emma Wilson",
-                team3_role: "首席可持续发展官",
-                team3_bio: "环境政策专家",
+                team1_bio: "Rosario是MG澳大利亚的首席执行官兼创始人，致力于加强和现代化秘鲁与澳大利亚之间的采矿合作。凭借对可持续增长和国际合作的强烈愿景，她以创新、效率和道德行业实践为重点领导公司。",
+                team1_bio2: "她的领导力连接了两个资源丰富的国家，旨在为社区和环境创造长期利益。",
+                team2_name: "Luis Enrique Yhui Jordan",
+                team2_role: "MG澳大利亚领导者",
+                team2_bio: "Luis是MG澳大利亚的领导者，也是秘鲁澳大利亚西澳领事馆的首席执行官，他专注于加强秘鲁与西澳大利亚之间的外交、经济和文化联系。",
+                team2_bio2: "凭借在国际关系和战略领导方面的丰富经验，他指导MG澳大利亚的使命，连接各大洲的行业，特别是在采矿领域，同时促进合作、可持续性和长期发展。",
+                team3_name: "Gerard Enrique Yhui Choquenaira",
+                team3_role: "软件设计师",
+                team3_bio: "Gerard是MG澳大利亚的软件设计师，拥有Python、HTML、CSS、JavaScript、PHP和C++的高级编码技能。年仅10岁的他为团队带来了非凡的创造力和技术能力。",
+                team3_bio2: "对技术充满热情并致力于学习，Gerard在塑造MG澳大利亚的软件系统方面发挥着关键作用，证明创新不分年龄。",
                 privacy: "隐私政策",
                 terms: "服务条款"
             }
@@ -1094,6 +1145,24 @@
             if (!contactBtn.contains(e.target) && !contactMenu.contains(e.target)) {
                 contactMenu.classList.remove('active');
             }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
         
         // Logo click to home
