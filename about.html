@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Speech SDK -->
-    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+    <!-- ResponsiveVoice -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
     <style>
         :root {
             --primary-color: #032A53;
@@ -372,9 +372,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
-            overflow: hidden;
             margin-top: 0;
+            overflow: hidden;
         }
         
         .hero-video {
@@ -391,13 +390,11 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            animation: fadeInDown 1s ease-out;
         }
         
         .hero-text p {
             font-size: 1.5rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
         }
         
         /* About Content Sections */
@@ -414,31 +411,12 @@
             padding: 40px;
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        
-        .about-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
         
         .about-section h2 {
             color: var(--accent-color);
             margin-bottom: 30px;
             font-size: 2.2rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .about-section h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--hover-color));
-            border-radius: 3px;
         }
         
         .about-section p {
@@ -447,51 +425,41 @@
             font-size: 1.1rem;
         }
         
-        /* Horizontal Team Grid */
+        /* Horizontal Team Layout */
         .team-container {
-            overflow-x: auto;
-            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin-top: 40px;
         }
         
-        .team-grid {
-            display: flex;
-            gap: 30px;
-            padding: 10px;
-            min-width: fit-content;
-        }
-        
         .team-member {
+            display: flex;
+            align-items: center;
+            gap: 30px;
             background: var(--glass-color);
             backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 15px;
-            text-align: center;
             transition: all 0.4s ease;
             border: 1px solid rgba(255,255,255,0.1);
-            min-width: 300px;
-            flex: 0 0 auto;
-            animation: fadeIn 0.8s ease-out;
         }
         
         .team-member:hover {
-            transform: translateY(-10px) scale(1.03);
+            transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
         
         .team-member img {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 50%;
-            margin-bottom: 20px;
             border: 3px solid var(--accent-color);
-            transition: all 0.3s ease;
         }
         
-        .team-member:hover img {
-            transform: rotate(5deg);
-            border-color: var(--hover-color);
+        .team-member-info {
+            flex: 1;
         }
         
         /* Footer */
@@ -678,14 +646,8 @@
             box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
         }
         
-        /* Voice Reader Button */
-        .voice-reader {
-            position: relative;
-            display: inline-block;
-            margin-left: 15px;
-        }
-        
-        .voice-reader-btn {
+        /* Voice Button */
+        .voice-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
@@ -700,40 +662,38 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            margin-left: 10px;
         }
         
-        .voice-reader-btn:hover {
+        .voice-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.05);
-        }
-        
-        .voice-reader-btn i {
-            transition: all 0.3s ease;
-        }
-        
-        .voice-reader-btn.active i {
-            color: var(--hover-color);
-            animation: pulse 1.5s infinite;
         }
         
         /* Menu Link Hover Gradient */
         .header-content .navbar-nav .nav-link {
             color: white !important;
             position: relative;
+            background: linear-gradient(to right, transparent, transparent);
+            background-size: 200% 100%;
+            background-position: right bottom;
             transition: all 0.3s ease;
-            background: transparent;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, white, white);
-            background-size: 0% 100%;
-            background-repeat: no-repeat;
-            transition: background-size 0.3s ease;
         }
         
         .header-content .navbar-nav .nav-link:hover {
-            background-size: 100% 100%;
-            background-image: linear-gradient(to right, var(--accent-color), var(--hover-color));
+            background: linear-gradient(to right, var(--accent-color), var(--hover-color));
+            background-size: 200% 100%;
+            background-position: left bottom;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .dynamic-island .desktop-menu a:hover {
+            background: linear-gradient(to right, var(--accent-color), var(--hover-color));
+            background-size: 200% 100%;
+            background-position: left bottom;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         /* Responsive Adjustments */
@@ -781,11 +741,6 @@
             .hero-text p {
                 font-size: 1.2rem;
             }
-            
-            .voice-reader {
-                margin-left: 0;
-                margin-right: 10px;
-            }
         }
         
         @media (max-width: 768px) {
@@ -797,8 +752,14 @@
                 height: 40px;
             }
             
-            .team-grid {
-                grid-template-columns: 1fr;
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .team-member img {
+                width: 150px;
+                height: 150px;
             }
 
             .footer-menu {
@@ -836,31 +797,6 @@
             .about-section {
                 padding: 30px 20px;
             }
-            
-            .voice-reader-btn span {
-                display: none;
-            }
-            
-            .voice-reader-btn {
-                padding: 8px 10px;
-            }
-        }
-
-        /* Additional Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -870,14 +806,12 @@
         <img src="logo.png" alt="MG Australia Logo" class="logo" id="homeLogo">
         <button class="hamburger"><i class="fas fa-bars"></i></button>
         <div class="desktop-menu">
-            <a href="index.html" data-translate="home">Home</a>
             <a href="services.html" data-translate="services">Services</a>
             <a href="why-choose-us.html" data-translate="why_choose_us">Why Choose Us</a>
             <a href="contact.html" data-translate="contact">Contact</a>
         </div>
         <div class="navbar-collapse">
             <ul class="nav-links">
-                <li><a href="index.html" data-translate="home">Home</a></li>
                 <li><a href="services.html" data-translate="services">Services</a></li>
                 <li><a href="why-choose-us.html" data-translate="why_choose_us">Why Choose Us</a></li>
                 <li><a href="contact.html" data-translate="contact">Contact</a></li>
@@ -920,7 +854,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="nav-links navbar-nav">
-                        <li class="nav-item"><a href="index.html" class="nav-link" data-translate="home">Home</a></li>
                         <li class="nav-item"><a href="services.html" class="nav-link" data-translate="services">Services</a></li>
                         <li class="nav-item"><a href="why-choose-us.html" class="nav-link" data-translate="why_choose_us">Why Choose Us</a></li>
                         <li class="nav-item"><a href="contact.html" class="nav-link" data-translate="contact">Contact</a></li>
@@ -943,6 +876,10 @@
                     <span data-translate="whatsapp">WhatsApp</span>
                 </a>
             </div>
+            <button class="voice-btn" id="voiceBtn">
+                <i class="fas fa-volume-up"></i>
+                <span data-translate="voice">Listen</span>
+            </button>
             <div class="language-dropdown">
                 <button class="language-btn">
                     <span>EN</span>
@@ -953,12 +890,6 @@
                     <a href="#" class="language-option" data-lang="es">Español</a>
                     <a href="#" class="language-option" data-lang="zh">中文</a>
                 </div>
-            </div>
-            <div class="voice-reader">
-                <button class="voice-reader-btn" id="voiceReaderBtn">
-                    <i class="fas fa-volume-up"></i>
-                    <span data-translate="listen">Listen</span>
-                </button>
             </div>
         </div>
     </div>
@@ -984,26 +915,30 @@
             <p data-translate="about_p2">Our journey has been guided by an unwavering commitment to environmental stewardship and community engagement. We measure our success not just in mineral yields, but in positive environmental and social impact, creating smarter, more sustainable mining solutions that benefit both people and the planet.</p>
         </div>
         
-        <div class="about-section" data-aos="fade-up" id="leadershipTeam">
+        <div class="about-section" data-aos="fade-up" id="ourTeam">
             <h2 data-translate="team_heading">Our Leadership Team</h2>
             <div class="team-container">
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="team1.jpg" alt="CEO">
+                <div class="team-member">
+                    <img src="team1.jpg" alt="CEO">
+                    <div class="team-member-info">
                         <h3 data-translate="team1_name">Rosario Choquenaira Florez</h3>
                         <p data-translate="team1_role">CEO & Founder</p>
                         <p data-translate="team1_bio">Rosario is the CEO and Founder of MG Australia, dedicated to enhancing and modernising mining collaboration between Peru and Australia. With a strong vision for sustainable growth and international partnership, she leads the company with a focus on innovation, efficiency, and ethical industry practices.</p>
                         <p data-translate="team1_bio2">Her leadership bridges two resource-rich nations, aiming to create long-term benefits for both communities and the environment.</p>
                     </div>
-                    <div class="team-member">
-                        <img src="team2.jpg" alt="Leader">
+                </div>
+                <div class="team-member">
+                    <img src="team2.jpg" alt="Leader">
+                    <div class="team-member-info">
                         <h3 data-translate="team2_name">Luis Enrique Yhui Jordan</h3>
                         <p data-translate="team2_role">Leader of MG Australia</p>
                         <p data-translate="team2_bio">Luis is the Leader of MG Australia and CEO of the Peru Australia WA Consular, where he focuses on strengthening diplomatic, economic, and cultural ties between Peru and Western Australia.</p>
                         <p data-translate="team2_bio2">With extensive experience in international relations and strategic leadership, he guides MG Australia's mission to connect industries across continents, particularly in the mining sector, while promoting cooperation, sustainability, and long-term development.</p>
                     </div>
-                    <div class="team-member">
-                        <img src="team3.jpg" alt="Software Designer">
+                </div>
+                <div class="team-member">
+                    <img src="team3.jpg" alt="Software Designer">
+                    <div class="team-member-info">
                         <h3 data-translate="team3_name">Gerard Enrique Yhui Choquenaira</h3>
                         <p data-translate="team3_role">Software Designer</p>
                         <p data-translate="team3_bio">Gerard is the Software Designer at MG Australia, with advanced coding skills in Python, HTML, CSS, JavaScript, PHP, and C++. At just 10 years old, he brings exceptional creativity and technical ability to the team.</p>
@@ -1017,7 +952,6 @@
     <footer>
         <div class="footer-content">
             <div class="footer-menu">
-                <a href="index.html" data-translate="home">Home</a>
                 <a href="services.html" data-translate="services">Services</a>
                 <a href="why-choose-us.html" data-translate="why_choose_us">Why Choose Us</a>
                 <a href="contact.html" data-translate="contact">Contact</a>
@@ -1110,7 +1044,7 @@
                 team3_bio2: "Passionate about technology and committed to learning, Gerard plays a key role in shaping MG Australia's software systems, proving that innovation knows no age.",
                 privacy: "Privacy Policy",
                 terms: "Terms of Service",
-                listen: "Listen"
+                voice: "Listen"
             },
             es: {
                 home: "Inicio",
@@ -1142,7 +1076,7 @@
                 team3_bio2: "Apasionado por la tecnología y comprometido con el aprendizaje, Gerard juega un papel clave en la configuración de los sistemas de software de MG Australia, demostrando que la innovación no conoce edad.",
                 privacy: "Política de Privacidad",
                 terms: "Términos de Servicio",
-                listen: "Escuchar"
+                voice: "Escuchar"
             },
             zh: {
                 home: "首页",
@@ -1174,7 +1108,7 @@
                 team3_bio2: "对技术充满热情并致力于学习，Gerard在塑造MG澳大利亚的软件系统方面发挥着关键作用，证明创新不分年龄。",
                 privacy: "隐私政策",
                 terms: "服务条款",
-                listen: "聆听"
+                voice: "聆听"
             }
         };
 
@@ -1299,94 +1233,46 @@
             });
         });
         
-        // Voice Reader Functionality
-        const voiceReaderBtn = document.getElementById('voiceReaderBtn');
-        let speechSynthesizer = null;
+        // Voice Button Functionality
+        const voiceBtn = document.getElementById('voiceBtn');
+        let isSpeaking = false;
         
-        async function initializeSpeechSynthesizer() {
-            const speechConfig = SpeechSDK.SpeechConfig.fromSubscription("YOUR_AZURE_SPEECH_KEY", "YOUR_AZURE_SPEECH_REGION");
-            speechSynthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
-        }
-        
-        function readText() {
-            if (!speechSynthesizer) {
-                initializeSpeechSynthesizer();
-            }
+        voiceBtn.addEventListener('click', function() {
+            const whoWeAreSection = document.getElementById('whoWeAre');
+            const teamSection = document.getElementById('ourTeam');
             
             // Scroll to the Who We Are section
-            document.getElementById('whoWeAre').scrollIntoView({ behavior: 'smooth' });
+            whoWeAreSection.scrollIntoView({ behavior: 'smooth' });
             
             // Get all text to be read
-            const currentLang = localStorage.getItem('language') || 'en';
-            const aboutTitle = translations[currentLang].about_heading1;
-            const aboutText1 = translations[currentLang].about_p1;
-            const aboutText2 = translations[currentLang].about_p2;
-            const teamTitle = translations[currentLang].team_heading;
+            const whoWeAreText = Array.from(whoWeAreSection.querySelectorAll('[data-translate]'))
+                .map(el => translations[currentLang][el.getAttribute('data-translate')] || el.textContent)
+                .join(' ');
+                
+            const teamText = Array.from(teamSection.querySelectorAll('[data-translate]'))
+                .map(el => translations[currentLang][el.getAttribute('data-translate')] || el.textContent)
+                .join(' ');
             
-            // Team bios
-            const team1Name = translations[currentLang].team1_name;
-            const team1Role = translations[currentLang].team1_role;
-            const team1Bio1 = translations[currentLang].team1_bio;
-            const team1Bio2 = translations[currentLang].team1_bio2;
+            const fullText = whoWeAreText + ' ' + teamText;
             
-            const team2Name = translations[currentLang].team2_name;
-            const team2Role = translations[currentLang].team2_role;
-            const team2Bio1 = translations[currentLang].team2_bio;
-            const team2Bio2 = translations[currentLang].team2_bio2;
-            
-            const team3Name = translations[currentLang].team3_name;
-            const team3Role = translations[currentLang].team3_role;
-            const team3Bio1 = translations[currentLang].team3_bio;
-            const team3Bio2 = translations[currentLang].team3_bio2;
-            
-            const fullText = `${aboutTitle}. ${aboutText1}. ${aboutText2}. 
-                ${teamTitle}. 
-                ${team1Name}, ${team1Role}. ${team1Bio1}. ${team1Bio2}.
-                ${team2Name}, ${team2Role}. ${team2Bio1}. ${team2Bio2}.
-                ${team3Name}, ${team3Role}. ${team3Bio1}. ${team3Bio2}.`;
-            
-            speechSynthesizer.speakTextAsync(
-                fullText,
-                function (result) {
-                    if (result.reason === SpeechSDK.ResultReason.SynthesizingAudioCompleted) {
-                        console.log("Speech synthesized to speaker for text.");
-                        voiceReaderBtn.classList.remove('active');
-                    } else {
-                        console.error("Speech synthesis canceled, " + result.errorDetails);
+            if (isSpeaking) {
+                responsiveVoice.cancel();
+                isSpeaking = false;
+                voiceBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span data-translate="voice">Listen</span>';
+                applyTranslations(currentLang);
+            } else {
+                responsiveVoice.speak(fullText, "UK English Female", {
+                    onstart: function() {
+                        isSpeaking = true;
+                        voiceBtn.innerHTML = '<i class="fas fa-stop"></i> <span data-translate="voice">Stop</span>';
+                        applyTranslations(currentLang);
+                    },
+                    onend: function() {
+                        isSpeaking = false;
+                        voiceBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span data-translate="voice">Listen</span>';
+                        applyTranslations(currentLang);
                     }
-                },
-                function (err) {
-                    console.error("Error: " + err);
-                    // Fallback to browser speech synthesis if Azure fails
-                    fallbackSpeechSynthesis(fullText);
                 });
-        }
-        
-        function fallbackSpeechSynthesis(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = localStorage.getItem('language') || 'en-US';
-                utterance.onend = function() {
-                    voiceReaderBtn.classList.remove('active');
-                };
-                speechSynthesis.speak(utterance);
-            } else {
-                alert("Text-to-speech not supported in this browser.");
-                voiceReaderBtn.classList.remove('active');
-            }
-        }
-        
-        voiceReaderBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            if (this.classList.contains('active')) {
-                readText();
-            } else {
-                if (speechSynthesizer) {
-                    speechSynthesizer.close();
-                }
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                }
             }
         });
         
